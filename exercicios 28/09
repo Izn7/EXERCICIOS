@@ -1,0 +1,243 @@
+Java 
+
+1. Par ou ímpar 
+Leia um número inteiro e mostre PAR ou ÍMPAR.
+ 
+2. Maior de dois
+Leia dois inteiros e mostre o maior (ou “Iguais”).
+ 
+3. Calculadora com menu 
+Mostre: 
+1- Somar 2- Subtrair 3- Multiplicar 4- Dividir Leia a opção e dois números. ⚠️ Tratedivisão por zero.
+ 
+4. Validação de entrada
+Leia uma nota entre 0 e 100. Enquanto inválida, pedir novamente.
+5. Simulador de caixa
+Saldo inicial: R$ 1000,00 Menu: 
+1- Depositar 2- Sacar 3- Ver saldo 4- Sair 
+Regras:
+• depósito > 0
+• saque > 0 e saque <= saldo
+• ao sair, mostre saldo final
+6. Desconto por categoria
+Leia:
+• o valor da compra (real)
+• a categoria do cliente (inteiro: 1 = comum, 2 = premium, 3 = funcionário)
+Aplique o desconto:
+• Categoria 1: 5%
+• Categoria 2: 10%
+• Categoria 3: 15%
+Mostre:
+• valor do desconto
+• valor final a pagar
+📌 Regras:
+• Se a categoria for diferente de 1, 2 ou 3, mostrar “Categoria inválida”.
+ 
+ 
+ 
+Resposta
+ 
+1. package com.example;
+ 
+import java.util.Scanner;
+ 
+public class Main {
+   public static void main(String[] args) {
+ 
+Scanner leia = new  Scanner (System.in);
+ 
+int num1;
+ 
+System.out.println("escreva um numero: ");
+num1= leia.nextInt();
+ 
+ 
+if(num1 % 2 == 0){
+   System.out.println("o "+num1+" é par");
+} else {
+   System.out.println("o "+num1+" é ímpar");
+}   2- package com.example;
+ 
+import java.util.Scanner;
+ 
+public class Main {
+    public static void main(String[] args) {
+ 
+Scanner leia = new  Scanner (System.in);
+ 
+int num1, num2;
+ 
+System.out.println("escreva um numero: ");
+num1= leia.nextInt();
+ 
+System.out.println("escreva um numero: ");
+num2= leia.nextInt();
+
+if(num1 > num2){
+    System.out.println("o "+num1+" é maior que o "+num2);
+} else if (num1 == num2){
+    System.out.println("o "+num1+" e o "+num2+" são iguais");
+}else{
+    System.out.println("o "+num2+" é maior que o "+num1);
+}
+ 
+ 
+ 
+3- import java.util.Scanner;
+ 
+public class App {
+ 
+    public static void main(String[] args) throws Exception{
+ 
+        Scanner leia = new Scanner(System.in);
+        System.out.println("Digite o primeiro numero: ");
+        float num1 = leia.nextFloat();
+ 
+        System.out.println("Digite o segundo numero: ");
+        float num2 = leia.nextFloat();
+ 
+        int opcao;
+ 
+        System.out.println("Digite o 1 para soma: ");
+        System.out.println("Digite o 2 para subtração: ");
+        System.out.println("Digite o 3 para multiplicação: ");
+        System.out.println("Digite o 4 Dividir: ");
+ 
+        opcao = leia.nextInt();
+ 
+        switch (opcao) {
+            case 1:
+                System.out.println("Resultado da soma é: " + (num1 + num2));
+                break;
+            case 2:
+                if (num1 >= num2) {
+                    System.out.println("Resultado da subtração é: " + (num1 - num2));
+                } else {
+                    System.out.println("Resultado da subtração é: " + (num2 - num1));
+                }
+                break;
+            case 3:
+                if (num2 == 0) {
+                    System.out.println("Resultado é nulo");
+                } else {
+                    System.out.println("Resultado da multiplicação é: " + (num1 * num2));
+                }
+                break;
+ 
+            case 4:
+                if (num2 == 0) {
+                    System.out.println("Você está dividindo nada ");
+                } else if (num2 > num1) {
+                    System.out.println("Divisão incoerente ");
+                } else {
+                    System.out.println("Resultado da divisão é: " + (num1 / num2));
+                }
+                break;
+            default:
+                System.out.println("Opção inválida");
+                throw new AssertionError();
+        }
+    }
+}
+
+5-
+import java.util.Scanner;
+
+public class Questao005 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double saldo = 1000.00;
+        int opcao;
+
+        do {
+            System.out.println("\n===== CAIXA ELETRÔNICO =====");
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Ver saldo");
+            System.out.println("4 - Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.nextInt();
+
+            switch (opcao) {
+
+                case 1:
+                    System.out.print("Digite o valor do depósito: R$ ");
+                    double deposito = sc.nextDouble();
+
+                    if (deposito > 0) {
+                        saldo += deposito;
+                        System.out.printf("Depósito realizado! Saldo: R$ %.2f%n", saldo);
+                    } else {
+                        System.out.println("O depósito deve ser maior que zero.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Digite o valor do saque: R$ ");
+                    double saque = sc.nextDouble();
+
+                    if (saque > 0 && saque <= saldo) {
+                        saldo <= saque;
+                        System.out.printf("Saque realizado! Saldo: R$ “+saldo);
+                    } else {
+                        System.out.println("Saque inválido.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.printf("Saldo atual: R$", +saldo);
+                    break;
+
+                case 4:
+                    System.out.printf("Saldo final: R$ ", +saldo);
+                    System.out.println("Obrigado por utilizar o caixa!");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 4);
+
+        sc.close();
+    }
+}
+
+6-
+
+import java.util.Scanner;
+
+public class Questao6 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite o valor da compra: ");
+        double valor = sc.nextDouble();
+
+        System.out.print("Digite a categoria: ");
+        int categoria = sc.nextInt();
+
+        double desconto = 0;
+
+        if (categoria == 1) {
+            desconto = 5;
+        } else if (categoria == 2) {
+            desconto = 10;
+        } else if (categoria == 3) {
+            desconto = 15;
+        } else {
+            System.out.println("Categoria inválida");
+            return;
+        }
+
+        double valorDesconto = valor * desconto / 100;
+        double valorFinal = valor - valorDesconto;
+
+        System.out.println("Desconto: R$ " + valorDesconto);
+        System.out.println("Valor final: R$ " + valorFinal);
+
+        sc.close();
+    }
+}
